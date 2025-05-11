@@ -1,9 +1,35 @@
 body{
-    background-color: rgb(10, 14, 2);
+    background-image: url("../images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: #d3d3d3;
+    background-color: #0b120e;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    flex-direction: column;
+}
+.container_title{
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+.logo{
+    max-width: 100%;
+    max-height: 100%;
+    width: 25vw;
 }
 h1{
+    font-family: 'Century', serif;
+    font-size: 4vw;
+    margin-left: 1em;
     text-align: center;
+    align-self: center;
 }
 
 .linkedin{
@@ -23,4 +49,5 @@ h1{
 
 footer{
     text-align: right;
+    margin-right: 2em;
 }

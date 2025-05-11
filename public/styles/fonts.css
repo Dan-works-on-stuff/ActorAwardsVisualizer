@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/CenturyBoldSWFTE.woff2') format('woff2'),
+    url('../fonts/CenturyBoldSWFTE.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/CenturyItalicSWFTE.woff2') format('woff2'),
+    url('../fonts/CenturyItalicSWFTE.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/CenturyRegularSWFTE.woff2') format('woff2'),
+    url('../fonts/CenturyRegularSWFTE.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/CenturyBoldItalicSWFTE.woff2') format('woff2'),
+    url('../fonts/CenturyBoldItalicSWFTE.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/Century.woff2') format('woff2'),
+    url('../fonts/Century.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/Century-Normal.woff2') format('woff2'),
+    url('../fonts/Century-Normal.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Century';
+    src: url('../fonts/Century-Bold.woff2') format('woff2'),
+    url('../fonts/Century-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
