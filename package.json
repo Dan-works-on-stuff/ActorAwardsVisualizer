@@ -1,0 +1,26 @@
+{
+  "name": "actorawardsvisualizer",
+  "version": "1.0.0",
+  "description": "SAG Chronicles",
+  "homepage": "https://github.com/Dan-works-on-stuff/ActorAwardsVisualizer/index.html",
+  "bugs": {
+    "url": "https://github.com/Dan-works-on-stuff/ActorAwardsVisualizer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dan-works-on-stuff/ActorAwardsVisualizer.git"
+  },
+  "license": "MIT",
+  "author": "Radu Dan, Adrian Popa",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
+}
