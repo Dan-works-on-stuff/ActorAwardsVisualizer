@@ -13,12 +13,14 @@
   "license": "MIT",
   "author": "Radu Dan, Adrian Popa",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10"
   },
   "dependencies": {
     "sqlite3": "^5.1.7"
