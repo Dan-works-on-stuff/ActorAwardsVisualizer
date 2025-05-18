@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrity News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .news-container {
+            margin-top: 20px;
+        }
+        .news-item {
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+        }
+        .news-item h3 {
+            margin: 0 0 10px 0;
+        }
+        .news-item p {
+            color: #666;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Celebrity News</h1>
+<button onclick="fetchNews()">Get Random Celebrity News</button>
+<div id="celebrity-name"></div>
+<div id="news-container" class="news-container"></div>
+
+<script>
+    async function fetchNews() {
+        try {
+            const response = await fetch('/api/celebrity-news');
+            const data = await response.json();
+
+            document.getElementById('celebrity-name').innerHTML =
+                `<h2>News about ${data.celebrity}</h2>`;
+
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = data.news.map(article => `
+                    <div class="news-item">
+                        <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+                        <p>${article.description || ''}</p>
+                        <small>Published: ${new Date(article.publishedAt).toLocaleDateString()}</small>
+                    </div>
+                `).join('');
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('news-container').innerHTML =
+                '<p>Error loading news. Please try again.</p>';
+        }
+    }
+
+    // Load news when page loads
+    fetchNews();
+</script>
+</body>
+</html>
