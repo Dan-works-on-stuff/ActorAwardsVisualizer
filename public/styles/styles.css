@@ -1,16 +1,15 @@
 body{
-    background-image: url("../images/background.png");
+    background-image: url("../images/background.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     color: #d3d3d3;
-    background-color: #0b120e;
+    background-color: #011109;
     min-height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
     flex-direction: column;
 }
 .container_title{
@@ -30,6 +29,10 @@ h1{
     margin-left: 1em;
     text-align: center;
     align-self: center;
+}
+
+button{
+    font-size: 2vw;
 }
 
 .linkedin{

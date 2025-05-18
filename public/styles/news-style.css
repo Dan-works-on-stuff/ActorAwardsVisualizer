@@ -1,0 +1,75 @@
+body {
+    font-family: 'Century', serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #011109;
+    color: darkgray;
+}
+
+.search-container {
+    margin-bottom: 20px; /* Add some space below the search bar */
+    display: flex; /* Use flexbox to align input and button horizontally */
+    gap: 10px; /* Add space between the input and the button */
+    align-items: center; /* Vertically align items in the container */
+}
+
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    flex-grow: 1; /* Allows the input field to take up the maximum available space */
+    background-color: #011109;
+    color: #6B8F71; /* Sets the text color to match the links */
+    border: 1px solid #6B8F71; /* Sets the border color to match the links */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width */
+    border-radius: 4px; /* Optional: Adds slight rounded corners */
+}
+
+/* Style for the placeholder text inside the search input */
+#search-input::placeholder {
+    color: rgba(107, 143, 113, 0.7); /* Sets placeholder color to a slightly transparent version of #6B8F71 */
+    opacity: 1; /* Ensures the placeholder is not too transparent in some browsers */
+}
+
+/* Style for the search button */
+#search-button {
+    /* Inherits padding, font-size, cursor from the generic button rule */
+    background-color: #011109; /* Matches the body background for a low-profile look */
+    color: #6B8F71; /* Sets the text color to match the links */
+    border: 1px solid #6B8F71; /* Sets the border color to match the links */
+    border-radius: 4px; /* Optional: Adds slight rounded corners */
+    transition: background-color 0.2s ease; /* Smooth transition on hover */
+}
+
+/* Style for the search button on hover */
+#search-button:hover {
+    background-color: #052515; /* Slightly lighter dark background on hover */
+    cursor: pointer; /* Ensures the cursor is a pointer */
+}
+
+.news-container {
+    margin-top: 20px;
+}
+.news-item {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+}
+.news-item h3 {
+    margin: 0 0 10px 0;
+}
+.news-item p {
+    color: #666;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: #6B8F71;
+}
+a:hover {
+    color: #9FCC2E;
+}

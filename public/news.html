@@ -3,65 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/news-style.css">
+    <link rel="stylesheet" href="styles/fonts.css">
     <title>Celebrity News</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .news-container {
-            margin-top: 20px;
-        }
-        .news-item {
-            border-bottom: 1px solid #ccc;
-            padding: 15px 0;
-        }
-        .news-item h3 {
-            margin: 0 0 10px 0;
-        }
-        .news-item p {
-            color: #666;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
 <h1>Celebrity News</h1>
-<button onclick="fetchNews()">Get Random Celebrity News</button>
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Enter celebrity name...">
+    <button id="search-button">Search News</button>
+</div>
+
 <div id="celebrity-name"></div>
 <div id="news-container" class="news-container"></div>
 
 <script>
-    async function fetchNews() {
+    // Function to fetch news based on an optional query
+    async function fetchNews(query = '') { // Added query parameter with default empty string
         try {
-            const response = await fetch('/api/celebrity-news');
+            // Construct the API URL. If query is empty, it fetches latest news.
+            // We assume your backend API can handle a ?query= parameter.
+            const apiUrl = query ? `/api/celebrity-news?query=${encodeURIComponent(query)}` : '/api/celebrity-news';
+
+            const response = await fetch(apiUrl);
+
+            // Check if the response is OK (status code 200-299)
+            if (!response.ok) {
+                // If not OK, throw an error with the status text
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const data = await response.json();
 
+            // Update the celebrity name display based on whether a query was used
             document.getElementById('celebrity-name').innerHTML =
-                `<h2>News about ${data.celebrity}</h2>`;
+                query ? `<h2>News about ${data.celebrity}</h2>` : `<h2>Latest Celebrity News</h2>`;
 
             const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = data.news.map(article => `
-                    <div class="news-item">
-                        <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
-                        <p>${article.description || ''}</p>
-                        <small>Published: ${new Date(article.publishedAt).toLocaleDateString()}</small>
-                    </div>
-                `).join('');
+
+            // Check if data.news is an array and has items
+            if (data.news && Array.isArray(data.news) && data.news.length > 0) {
+                newsContainer.innerHTML = data.news.map(article => `
+                        <div class="news-item">
+                            <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+                            <p>${article.description || ''}</p>
+                            <small>Published: ${new Date(article.publishedAt).toLocaleDateString('en-GB')}</small>
+                        </div>
+                    `).join('');
+            } else {
+                // Display a message if no news is found
+                document.getElementById('celebrity-name').innerHTML =
+                    query ? `<h2>No news found for ${query}</h2>` : `<h2>No latest celebrity news found</h2>`;
+                newsContainer.innerHTML = ''; // Clear previous news
+            }
+
+
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error fetching news:', error);
             document.getElementById('news-container').innerHTML =
                 '<p>Error loading news. Please try again.</p>';
+            document.getElementById('celebrity-name').innerHTML = ''; // Clear celebrity name on error
         }
     }
 
-    // Load news when page loads
+    // Get the search input and button elements
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    // Add an event listener to the search button
+    searchButton.addEventListener('click', () => {
+        const query = searchInput.value.trim(); // Get input value and remove leading/trailing whitespace
+        fetchNews(query); // Call fetchNews with the search query
+    });
+
+    // Also allow searching by pressing Enter in the input field
+    searchInput.addEventListener('keypress', (event) => {
+        // Check if the pressed key is Enter (key code 13)
+        if (event.key === 'Enter') {
+            // Prevent the default form submission if the input was part of a form
+            event.preventDefault();
+            const query = searchInput.value.trim();
+            fetchNews(query);
+        }
+    });
+
+    // Load latest news when the page loads (initial state)
     fetchNews();
 </script>
 </body>
