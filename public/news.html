@@ -5,90 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/news-style.css">
     <link rel="stylesheet" href="styles/fonts.css">
-    <title>Celebrity News</title>
+    <title>Actor and Awards Explorer</title>
 </head>
 <body>
-<h1>Celebrity News</h1>
+<h1>Actor Movies & Awards</h1>
 <div class="search-container">
-    <input type="text" id="search-input" placeholder="Enter celebrity name...">
-    <button id="search-button">Search News</button>
+    <input type="text" id="search-input" placeholder="Enter actor name...">
+    <button id="search-button">Search</button>
 </div>
 
 <div id="celebrity-name"></div>
 <div id="news-container" class="news-container"></div>
 
 <script>
-    // Function to fetch news based on an optional query
-    async function fetchNews(query = '') { // Added query parameter with default empty string
+    // Fetches movies and (optionally) awards for the actor
+    async function fetchNews(query = '') {
         try {
-            // Construct the API URL. If query is empty, it fetches latest news.
-            // We assume your backend API can handle a ?query= parameter.
-            const apiUrl = query ? `/api/celebrity-news?query=${encodeURIComponent(query)}` : '/api/celebrity-news';
+            const apiUrl = query
+                ? `/api/celebrity-news?query=${encodeURIComponent(query)}`
+                : '/api/celebrity-news';
 
             const response = await fetch(apiUrl);
 
-            // Check if the response is OK (status code 200-299)
             if (!response.ok) {
-                // If not OK, throw an error with the status text
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
 
-            // Update the celebrity name display based on whether a query was used
-            document.getElementById('celebrity-name').innerHTML =
-                query ? `<h2>News about ${data.celebrity}</h2>` : `<h2>Latest Celebrity News</h2>`;
-
+            const celebElem = document.getElementById('celebrity-name');
             const newsContainer = document.getElementById('news-container');
 
-            // Check if data.news is an array and has items
-            if (data.news && Array.isArray(data.news) && data.news.length > 0) {
-                newsContainer.innerHTML = data.news.map(article => `
-                        <div class="news-item">
-                            <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
-                            <p>${article.description || ''}</p>
-                            <small>Published: ${new Date(article.publishedAt).toLocaleDateString('en-GB')}</small>
-                        </div>
-                    `).join('');
-            } else {
-                // Display a message if no news is found
-                document.getElementById('celebrity-name').innerHTML =
-                    query ? `<h2>No news found for ${query}</h2>` : `<h2>No latest celebrity news found</h2>`;
-                newsContainer.innerHTML = ''; // Clear previous news
+            if (data.error) {
+                celebElem.innerHTML = '';
+                newsContainer.innerHTML = `<p>${data.error}</p>`;
+                return;
             }
 
+            if (data.celebrity) {
+                celebElem.innerHTML = `<h2>${data.celebrity}</h2>`;
+            } else {
+                celebElem.innerHTML = '';
+            }
 
+            // If results (movies) found, show them
+            if (data.news && Array.isArray(data.news) && data.news.length > 0) {
+                newsContainer.innerHTML = data.news.map(movie => `
+                    <div class="news-item">
+                        ${movie.poster ? `<img src="${movie.poster}" alt="${movie.title} poster" style="width:90px; float:left; margin-right:10px;" />` : ''}
+                        <h3><a href="${movie.url}" target="_blank">${movie.title}</a></h3>
+                        <p>${movie.description || ''}</p>
+                    </div>
+                `).join('');
+            } else {
+                newsContainer.innerHTML = `<p>No movies or awards found for this person.</p>`;
+            }
         } catch (error) {
-            console.error('Error fetching news:', error);
+            document.getElementById('celebrity-name').innerHTML = '';
             document.getElementById('news-container').innerHTML =
-                '<p>Error loading news. Please try again.</p>';
-            document.getElementById('celebrity-name').innerHTML = ''; // Clear celebrity name on error
+                '<p>Error loading data. Please try again.</p>';
         }
     }
 
-    // Get the search input and button elements
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
 
-    // Add an event listener to the search button
     searchButton.addEventListener('click', () => {
-        const query = searchInput.value.trim(); // Get input value and remove leading/trailing whitespace
-        fetchNews(query); // Call fetchNews with the search query
+        const query = searchInput.value.trim();
+        fetchNews(query);
     });
 
-    // Also allow searching by pressing Enter in the input field
-    searchInput.addEventListener('keypress', (event) => {
-        // Check if the pressed key is Enter (key code 13)
+    searchInput.addEventListener('keypress', event => {
         if (event.key === 'Enter') {
-            // Prevent the default form submission if the input was part of a form
             event.preventDefault();
             const query = searchInput.value.trim();
             fetchNews(query);
         }
     });
 
-    // Load latest news when the page loads (initial state)
-    fetchNews();
+    // Optionally, load trending on page load
+    // fetchNews();
 </script>
 </body>
 </html>

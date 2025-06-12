@@ -1,71 +1,78 @@
-const NewsAPI = require('newsapi');
-// You'll need to sign up for a free API key at https://newsapi.org
-const newsapi = new NewsAPI('5db3bf8e32fb4e3fa4a5d77ae4040310');
-// This list is no longer strictly needed for random news,
-// but could potentially be used as suggestions or fallback.
-// const celebrities = [
-//     'Tom Hanks',
-//     'Meryl Streep',
-//     'Leonardo DiCaprio',
-//     'Jennifer Lawrence',
-//     'Morgan Freeman',
-//     'Nicusor Dan' // Assuming this is a relevant public figure you want news about
-// ];
+const https = require('https');
+const TMDB_BEARER_TOKEN = process.env.TMDB_KEY || 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NzU1NTZlNDgxMDNhYjMzOWY0ZGRhOTg2NzczYzJkYiIsIm5iZiI6MTc0OTMwMTgyNS42NTEsInN1YiI6IjY4NDQzYTQxOGQxZjI4NjYzZTNmYmZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ceIy4DfcvyNaQGqdBhZ2I_ivfczGnXZKw1QVX9vehuM';
+const TMDB_BASE_URL = 'api.themoviedb.org';
 
-/**
- * Fetches celebrity news.
- * If a query is provided, searches for news about that celebrity.
- * If no query is provided, fetches the latest general celebrity/entertainment news.
- * @param {string} query - Optional celebrity name or search term.
- * @returns {Promise<{celebrity: string, news: Array}>} - An object containing the celebrity/topic name and an array of news articles.
- */
-async function fetchCelebrityNews(query = '') {
-    let newsQuery;
-    let celebrityName;
+function fetchFromTMDB(path, params = {}) {
+    const query = new URLSearchParams({ language: 'en-US', ...params }).toString();
+    const options = {
+        hostname: TMDB_BASE_URL,
+        path: `${path}?${query}`,
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${TMDB_BEARER_TOKEN}`
+        }
+    };
 
-    if (query && query.trim() !== '') {
-        // If a query is provided and not just whitespace, search for that query
-        newsQuery = query.trim();
-        celebrityName = `News about ${query.trim()}`; // Label for the frontend
-    } else {
-        // If no query (or empty query), fetch latest general celebrity/entertainment news
-        // Using a broad query on the 'everything' endpoint sorted by date
-        newsQuery = 'celebrity OR entertainment';
-        celebrityName = 'Latest Celebrity News'; // Label for the frontend
-    }
-
-    try {
-        const response = await newsapi.v2.everything({
-            q: newsQuery, // Use the determined query
-            language: 'en', // Assuming English news
-            sortBy: 'publishedAt', // Sort by latest
-            pageSize: 10 // Fetch a reasonable number of articles (e.g., 10)
+    return new Promise((resolve, reject) => {
+        const req = https.request(options, res => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => {
+                try {
+                    resolve(JSON.parse(data));
+                } catch (e) {
+                    reject(e);
+                }
+            });
         });
+        req.on('error', reject);
+        req.end();
+    });
+}
 
-        // Check if articles were returned
-        if (response?.articles){
+async function fetchCelebrityNews(query = '') {
+    if (query && query.trim() !== '') {
+        // Step 1: Search for the person
+        const searchRes = await fetchFromTMDB('/3/search/person', { query: query.trim(), page: 1 });
+        const person = searchRes.results && searchRes.results[0];
+        if (person) {
+            // Step 2: Fetch their movie credits
+            const credits = await fetchFromTMDB(`/3/person/${person.id}/movie_credits`);
+            // Map to frontend format
+            const movies = (credits.cast || []).map(movie => ({
+                title: movie.title || movie.original_title || movie.name,
+                description: movie.character ? `as ${movie.character}` : '',
+                poster: movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : '',
+                url: movie.id ? `https://www.themoviedb.org/movie/${movie.id}` : ''
+            }));
             return {
-                celebrity: celebrityName,
-                news: response.articles
+                celebrity: person.name,
+                news: movies
             };
         } else {
-            // Return empty news array if no articles are found
-            console.log(`No articles found for query: "${newsQuery}"`);
             return {
-                celebrity: celebrityName, // Still return the requested celebrity/topic label
-                news: []
+                celebrity: query.trim(),
+                news: [],
+                error: `No movies or awards found for "${query.trim()}".`
             };
         }
-
-
-    } catch (error) {
-        console.error(`Error fetching news for query "${newsQuery}":`, error);
-        // Rethrow the error so the calling route can handle it
-        throw error;
+    } else {
+        // Trending as fallback
+        const trending = await fetchFromTMDB('/3/trending/all/day', { page: 1 });
+        const items = (trending.results || []).map(item => ({
+            title: item.title || item.name,
+            description: item.overview || '',
+            poster: item.poster_path ? `https://image.tmdb.org/t/p/w200${item.poster_path}` : '',
+            url: item.id ? `https://www.themoviedb.org/${item.media_type}/${item.id}` : ''
+        }));
+        return {
+            celebrity: '',
+            news: items
+        };
     }
 }
 
-// Export the new function
 module.exports = {
     fetchCelebrityNews
 };
