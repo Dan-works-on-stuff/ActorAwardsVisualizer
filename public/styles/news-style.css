@@ -53,6 +53,7 @@ body {
 .news-item {
     border-bottom: 1px solid #ccc;
     padding: 15px 0;
+    overflow: hidden; /* Add this line to contain floated elements */
 }
 .news-item h3 {
     margin: 0 0 10px 0;
