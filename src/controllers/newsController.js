@@ -1,4 +1,4 @@
-const newsService = require('../services/newsService');
+const NewsModel = require('../models/NewsModel');
 
 /**
  * Controller to handle requests for celebrity news (actor movies/awards from TMDB)
@@ -12,7 +12,7 @@ async function getCelebrityNews(req, res) {
                 ? req.query.query
                 : req.url && new URL(req.url, `http://${req.headers.host}`).searchParams.get('query');
 
-        const result = await newsService.fetchCelebrityNews(query);
+        const result = await NewsModel.fetchCelebrityNews(query);
 
         res.writeHead && res.writeHead(200, {
             'Content-Type': 'application/json',
