@@ -1,11 +1,12 @@
 // separation of concerns hehe
 
 const https = require('https');
-const TMDB_BEARER_TOKEN = process.env.TMDB_KEY;
+const config = require('../config'); // Import the centralized config
+const TMDB_BEARER_TOKEN = config.tmdb.apiKey;
 const TMDB_BASE_URL = 'api.themoviedb.org';
 
 if (!TMDB_BEARER_TOKEN) {
-    throw new Error('TMDB_KEY is not defined in the .env file. Please ensure it is set.');
+    throw new Error('TMDB_KEY is not defined. Please ensure it is set in your .env file and loaded correctly in the config.');
 }
 
 function fetchFromTMDB(path, params = {}) {
