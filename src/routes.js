@@ -1,17 +1,18 @@
 const { URL } = require('url');
 const path = require('path');
 const newsController = require('./controllers/newsController');
+const statsController = require('./controllers/statsController');
 const { serveStaticFile } = require('./utils/staticFileHelper');
 
-// Define your API routes
 const apiRoutes = {
-    '/api/celebrity-news': newsController.getCelebrityNews
+    '/api/celebrity-news': newsController.getCelebrityNews,
+    '/api/stats': statsController.getStats
 };
 
-// Go up one level from 'src' to reach the project root, then into 'public'
+// Define directories
 const publicDir = path.join(__dirname, '..', 'public');
+const utilsDir = path.join(__dirname, 'utils'); // The actual path to your utils folder
 
-// The main router function
 function router(req, res) {
     const parsedUrl = new URL(req.url, `https://${req.headers.host}`);
     let pathname = parsedUrl.pathname;
@@ -23,10 +24,14 @@ function router(req, res) {
     const handler = apiRoutes[pathname];
 
     if (handler) {
-        // If the path matches an API route, call its handler
+        // Handle API routes
         handler(req, res);
+    } else if (pathname.startsWith('/utils/')) {
+        // If the request is for a file in /utils/, serve it from the src/utils directory
+        const fileName = pathname.substring('/utils/'.length);
+        serveStaticFile(fileName, utilsDir, res);
     } else {
-        // Otherwise, delegate to the static file helper
+        // Handle all other static files from the 'public' directory
         serveStaticFile(pathname, publicDir, res);
     }
 }

@@ -30,9 +30,15 @@ h1{
     text-align: center;
     align-self: center;
 }
+h1 a {
+    text-decoration: none;
+    display: inline-flex; /* Makes the <a> tag size to its content (the button) */
+    vertical-align: middle; /* Improves alignment of the <a> tag within the line */
+}
 
 button{
     font-size: 2vw;
+    cursor: pointer;
 }
 
 .linkedin{

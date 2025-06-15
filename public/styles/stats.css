@@ -1,0 +1,30 @@
+body{
+    background-image: url("../images/background.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #d3d3d3;
+    background-color: #011109;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h1{
+    font-family: 'Century', serif;
+    font-size: 4vw;
+    margin-left: 1em;
+    text-align: center;
+    align-self: center;
+}
+
+.charts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
