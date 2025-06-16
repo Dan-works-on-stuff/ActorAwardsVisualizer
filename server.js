@@ -9,3 +9,6 @@ const PORT = config.server.port;
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
+
+///THIS IS THE SERVER FILE, DO NOT DELETE AND DO NOT MODIFY UNLESS YOU KNOW WHAT YOU ARE DOING. MOST MODIFICATIONS SHOULD BE DONE IN THE ROUTES OR CONTROLLERS FILES!!!
