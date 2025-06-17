@@ -1,0 +1,84 @@
+body {
+    font-family: 'Century', serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #011109;
+    color: #aad2ba;
+}
+
+.search-container {
+    margin-bottom: 20px; /* Add some space below the search bar */
+    display: flex; /* Use flexbox to align input and button horizontally */
+    gap: 10px; /* Add space between the input and the button */
+    align-items: center; /* Center items vertically */
+}
+
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    flex-grow: 1;
+    background-color: #011109;
+    color: #aad2ba;
+    border: 1px solid #aad2ba;
+    box-sizing: border-box;
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease; /* Add this for a smooth transition */
+}
+
+#search-input:focus {
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 10px #b9f5d8; /* Add a soft glow effect */
+}
+
+/* Style for the placeholder text inside the search input */
+#search-input::placeholder {
+    color: #aad2ba;
+    opacity: 0.6;
+}
+
+/* Style for the search button */
+#search-button {
+    background-color: #011109;
+    color: #aad2ba;
+    border: solid #aad2ba 1px;
+    border-radius: 10px;
+    transition: box-shadow 0.6s ease, background-color 0.6s ease, color 0.6s ease;
+}
+
+/* Style for the search button on hover */
+#search-button:hover{
+    background-color: #b9f5d8;
+    color: #052515;
+    
+    border-color: #b9f5d8;
+    box-shadow: 0 0 10px #b9f5d8; /* Add a soft glow effect */
+}
+
+.news-container {
+    margin-top: 20px;
+}
+.news-item {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    overflow: hidden;
+}
+.news-item h3 {
+    margin: 0 0 10px 0;
+}
+.news-item p {
+    color: #666;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: #6B8F71;
+}
+a:hover {
+    color: #9FCC2E;
+}
