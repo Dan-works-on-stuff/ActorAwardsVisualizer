@@ -13,7 +13,7 @@ db.serialize(() => {
     // Create the Actors table
     db.run(`CREATE TABLE IF NOT EXISTS Actors (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
+                    name TEXT NOT NULL UNIQUE,
                     tmdb_id INTEGER UNIQUE
             )`, (err) => {
         if (err) {
@@ -26,7 +26,7 @@ db.serialize(() => {
     // Create the Movies table
     db.run(`CREATE TABLE IF NOT EXISTS Movies (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    title TEXT NOT NULL,
+                    title TEXT NOT NULL UNIQUE,
                     release_year INTEGER,
                     tmdb_id INTEGER UNIQUE
     )`, (err) => {
@@ -53,7 +53,7 @@ db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS Awards (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL,
-                    year INTEGER NOT NULL UNIQUE
+                    year INTEGER NOT NULL UNIQUE 
     )`, (err) => {
         if (err) {
             console.error('Error creating Awards table:', err.message);
