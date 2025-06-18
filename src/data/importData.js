@@ -34,10 +34,12 @@ function getOrInsert(table, column, value) {
 }
 
 // Specific helper for Awards table to handle name and unique year
+// Specific helper for Awards table to handle name and unique year
 function getOrInsertAward(name, year) {
     return new Promise((resolve, reject) => {
         if (!name || !year) return resolve(null);
-        db.get(`SELECT id FROM Awards WHERE year = ?`, [year], (err, row) => {
+        // Correctly check for both name and year to find the specific award
+        db.get(`SELECT id FROM Awards WHERE name = ? AND year = ?`, [name, year], (err, row) => {
             if (err) return reject(err);
             if (row) {
                 resolve(row.id);
