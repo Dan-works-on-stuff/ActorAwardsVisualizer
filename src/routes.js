@@ -6,7 +6,8 @@ const { serveStaticFile } = require('./utils/staticFileHelper');
 
 const apiRoutes = {
     '/api/celebrity-news': newsController.getCelebrityNews,
-    '/api/stats': statsController.getStats
+    '/api/stats': statsController.getStats,
+    '/api/top-actors-stats': statsController.getTopActorsStats // Add the new route
 };
 
 // Define directories
