@@ -106,5 +106,6 @@ async function fetchCelebrityNews(query = '') {
 }
 
 module.exports = {
-    fetchCelebrityNews
+    fetchCelebrityNews,
+    fetchFromTMDB
 };
