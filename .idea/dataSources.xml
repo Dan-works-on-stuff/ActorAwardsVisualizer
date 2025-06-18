@@ -6,7 +6,7 @@
       <synchronize>true</synchronize>
       <remarks>AAV</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\radud\Documents\GitHub\ActorAwardsVisualizer\src\data\actors_awards.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:.\src\data\actors_awards.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
