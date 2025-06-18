@@ -1,5 +1,3 @@
-// separation of concerns hehe
-
 const https = require('https');
 const config = require('../config'); // Import the centralized config
 const TMDB_BEARER_TOKEN = config.tmdb.apiKey;
@@ -42,26 +40,53 @@ async function fetchCelebrityNews(query = '') {
     if (query && query.trim() !== '') {
         // Step 1: Search for the person
         const searchRes = await fetchFromTMDB('/3/search/person', { query: query.trim(), page: 1 });
-        const person = searchRes.results && searchRes.results[0];
-        if (person) {
-            // Step 2: Fetch their movie credits
-            const credits = await fetchFromTMDB(`/3/person/${person.id}/movie_credits`);
-            // Map to frontend format
+        const personSummary = searchRes.results && searchRes.results[0];
+
+        if (personSummary) {
+            // Step 2: Fetch full details and movie credits in parallel
+            const [personDetails, credits] = await Promise.all([
+                fetchFromTMDB(`/3/person/${personSummary.id}`),
+                fetchFromTMDB(`/3/person/${personSummary.id}/movie_credits`)
+            ]);
+
+            // Map movies
             const movies = (credits.cast || []).map(movie => ({
                 title: movie.title || movie.original_title || movie.name,
                 description: movie.character ? `as ${movie.character}` : '',
                 poster: movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : '',
                 url: movie.id ? `https://www.themoviedb.org/movie/${movie.id}` : ''
             }));
+
+            // Calculate age
+            let age = null;
+            if (personDetails.birthday) {
+                const birthDate = new Date(personDetails.birthday);
+                const today = new Date();
+                age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+            }
+
+            const celebrityData = {
+                name: personDetails.name,
+                birthday: personDetails.birthday,
+                age: age,
+                place_of_birth: personDetails.place_of_birth,
+                profile_path: personDetails.profile_path ? `https://image.tmdb.org/t/p/w400${personDetails.profile_path}` : null,
+                profile_url: `https://www.themoviedb.org/person/${personDetails.id}`
+            };
+
             return {
-                celebrity: person.name,
+                celebrity: celebrityData,
                 news: movies
             };
         } else {
             return {
-                celebrity: query.trim(),
+                celebrity: null,
                 news: [],
-                error: `No movies or awards found for \"${query.trim()}\".`
+                error: `No celebrity found for "${query.trim()}".`
             };
         }
     } else {
@@ -74,7 +99,7 @@ async function fetchCelebrityNews(query = '') {
             url: item.id ? `https://www.themoviedb.org/${item.media_type}/${item.id}` : ''
         }));
         return {
-            celebrity: '',
+            celebrity: null, // No specific celebrity for trending
             news: items
         };
     }

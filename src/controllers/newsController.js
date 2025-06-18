@@ -8,9 +8,8 @@ async function getCelebrityNews(req, res) {
     try {
         // Support both Express and pure Node style (check for both req.query and fallback)
         const query =
-            req.query && req.query.query
-                ? req.query.query
-                : req.url && new URL(req.url, `http://${req.headers.host}`).searchParams.get('query');
+            req.query?.query ||
+            (req.url && new URL(req.url, `https://${req.headers.host}`).searchParams.get('query'));
 
         const result = await NewsModel.fetchCelebrityNews(query);
 
