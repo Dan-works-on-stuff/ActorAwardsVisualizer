@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     legend: { display: false },
                     title: {
                         display: true,
-                        text: 'World Wine Production 2018'
+                        text: 'In cate tari am fost la toaleta'
                     }
                 }
             });

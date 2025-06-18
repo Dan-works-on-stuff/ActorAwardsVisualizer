@@ -14,7 +14,7 @@ async function getCelebrityNews(req, res) {
 
         const result = await NewsModel.fetchCelebrityNews(query);
 
-        res.writeHead && res.writeHead(200, {
+        res.writeHead?.(200, {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
         });
