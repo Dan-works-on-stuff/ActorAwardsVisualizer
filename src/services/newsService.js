@@ -1,5 +1,5 @@
 const https = require('https');
-const TMDB_BEARER_TOKEN = process.env.TMDB_KEY || 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NzU1NTZlNDgxMDNhYjMzOWY0ZGRhOTg2NzczYzJkYiIsIm5iZiI6MTc0OTMwMTgyNS42NTEsInN1YiI6IjY4NDQzYTQxOGQxZjI4NjYzZTNmYmZmNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ceIy4DfcvyNaQGqdBhZ2I_ivfczGnXZKw1QVX9vehuM';
+const TMDB_BEARER_TOKEN = process.env.TMDB_KEY
 const TMDB_BASE_URL = 'api.themoviedb.org';
 
 function fetchFromTMDB(path, params = {}) {
