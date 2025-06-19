@@ -1,0 +1,49 @@
+Cele mai importante aspecte pentru fiecare proiect în parte sunt:
+
+    JAVASCRIPT VANILA !!!!! NO FRAMEWORKS !!!!
+
+    Rezolvarea integrală a problemei – conform cerinţelor specifice fiecărui proiect propus.
+
+    Proiectele vor putea fi implementate pe partea de server folosind orice tehnologie, platformă şi limbaj de programare actuale, cu condiţia ca acestea să adopte o licenţă deschisă.
+
+    Nu se permite utilizarea de framework-uri la nivel de client (front-end) şi/sau server (back-end) Web.
+
+    Architectura aplicaţiei Web realizate va fi obligatoriu bazată pe servicii Web. Invocarea unui serviciu/API Web va fi efectuată în manieră asincronă via suita de tehnologii Ajax.
+
+    Pentru partea de client, interfaţa aplicaţiei Web va fi marcată obligatoriu în HTML5 – codul trebuind să fie valid conform specificaţiilor Consorţiului Web. Se vor utiliza foi de stiluri CSS valide – pentru verificare, se poate recurge la instrumente dedicate precum Stylelint.
+
+    Pentru stocarea şi managementul datelor, se vor putea utiliza servere de baze de date relaţionale, interogate via SQL – minimal, a se considera SQLite. Complementar, se poate recurge la servere de baze de date aliniate paradigmei NoSQL.
+
+    Se vor folosi pe cât posibil machete (template-uri) de prezentare şi metode de configurare şi administrare a aplicaţiei.
+
+    Alte cerinţe obligatorii:
+
+        Adoptarea principiilor designului Web responsiv.
+
+        Recurgerea la tehnici de prevenire a atacurilor (minimal, SQL injection şi Cross Site Scripting).
+
+        Import/export de date folosind formate deschise – minim, CSV (Comma Separated Values) şi JSON (JavaScript Object Notation).
+
+        Existenţa unui modul propriu de administrare a aplicaţiei Web.
+        GitHub Student
+        Developer Pack
+
+        Respectarea cerinţelor de bază ale ingineriei software – e.g., comentarea şi modularizarea codului-sursă, utilizarea unui sistem de stocare şi management online al codului-sursă (e.g., Bitbucket, GitLab, GitHub etc.).
+
+Suplimentar, vor putea fi apreciate următoarele:
+
+    Folosirea paradigmelor de programare obiectuală, funcţională şi/sau reactivă, în concordanţă cu tema proiectului.
+
+    Maturitatea şi eleganţa implementării, inclusiv adoptarea de şabloane de proiectare şi/sau a metodologiilor de dezvoltare software – de studiat Software Quality Checklist + Web Developer Checklist.
+
+    Lucrul în echipă. Proiectele susţinute doar de 1 persoană vor fi penalizate cu 2 puncte pentru fiecare componentă.
+
+    Gradul de creativitate a soluţiei furnizate.
+
+    Recurgerea la tehnici neprezentate la curs, cu accent pe cele disponibile în regim open source.
+
+    Impresia generală a proiectului.
+
+
+    Descrierea proiectului:
+Sa se realizeze un instrument Web de vizualizare flexibila a datelor referitoare la nominalizarile actorilor pentru ultimii A ani (cu A>3) la Screen Actors Guild (SAG) Awards. Informatiile suplimentare referitoare la fiecare actor si productie cinematografica vor putea fi preluate pe baza The Movie Database (TMDb). Aplicatia va genera statistici si vizualizari, in minim 3 maniere. In plus, acestea vor putea fi exportate in formatele CSV, WebP si SVG. Sistemul va oferi suport si pentru redarea de stiri privitoare la fiecare nominalizat in parte, pe baza unor surse externe de date configurabile in cadrul aplicatiei dezvoltate.

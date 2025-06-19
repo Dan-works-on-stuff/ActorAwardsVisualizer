@@ -35,7 +35,20 @@ function getTopActorsStats(req, res) {
     });
 }
 
+function getTopMoviesStats(req, res) {
+    statsModel.getTopMoviesByNominations((err, data) => {
+        if (err) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Error fetching top movies stats.' }));
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(data));
+    });
+}
+
 module.exports = {
     getStats,
-    getTopActorsStats // Export the new controller function
+    getTopActorsStats, // Export the new controller function
+    getTopMoviesStats
 };

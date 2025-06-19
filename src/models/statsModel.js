@@ -69,8 +69,42 @@ function getTopActorsByNominations(callback) {
     });
 }
 
+function getTopMoviesByNominations(callback) {
+    const db = new sqlite3.Database(dbPath, (err) => {
+        if (err) {
+            console.error('Error opening database', err.message);
+            return callback(err);
+        }
+    });
+
+    const tenYearsAgo = new Date().getFullYear() - 10;
+
+    const query = `
+        SELECT
+            M.title,
+            COUNT(N.id) as nomination_count
+        FROM Nominations N
+        JOIN Movies M ON N.movie_id = M.id
+        JOIN Awards A ON N.award_id = A.id
+        WHERE A.year >= ?
+        GROUP BY M.title
+        ORDER BY nomination_count DESC;
+    `;
+
+    db.all(query, [tenYearsAgo], (err, rows) => {
+        if (err) {
+            console.error('Error running query', err.message);
+            db.close();
+            return callback(err);
+        }
+        db.close();
+        callback(null, rows);
+    });
+}
+
 
 module.exports = {
     getActorNominations,
-    getTopActorsByNominations // Export the new function
+    getTopActorsByNominations, // Export the new function
+    getTopMoviesByNominations
 };
