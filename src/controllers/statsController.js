@@ -47,8 +47,22 @@ function getTopMoviesStats(req, res) {
     });
 }
 
+async function getWinnersTable(req, res) {
+    try {
+        const winners = await statsModel.getWinners();
+        res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+        res.end(JSON.stringify(winners));
+    } catch (error) {
+        console.error('Error in getWinnersTable:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Failed to fetch winners' }));
+    }
+}
+
+
 module.exports = {
     getStats,
     getTopActorsStats, // Export the new controller function
-    getTopMoviesStats
+    getTopMoviesStats,
+    getWinnersTable
 };

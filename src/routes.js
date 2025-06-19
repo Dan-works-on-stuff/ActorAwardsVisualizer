@@ -8,12 +8,13 @@ const apiRoutes = {
     '/api/celebrity-news': newsController.getCelebrityNews,
     '/api/stats': statsController.getStats,
     '/api/top-actors-stats': statsController.getTopActorsStats, // Add the new route
-    '/api/top-movies-stats': statsController.getTopMoviesStats
+    '/api/top-movies-stats': statsController.getTopMoviesStats,
+    '/api/winners': statsController.getWinnersTable
 };
 
 // Define directories
 const publicDir = path.join(__dirname, '..', 'public');
-const utilsDir = path.join(__dirname, 'utils'); // The actual path to your utils folder
+const utilsDir = path.join(__dirname, 'utils');
 
 function router(req, res) {
     const parsedUrl = new URL(req.url, `https://${req.headers.host}`);

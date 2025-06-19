@@ -1,0 +1,25 @@
+body {
+    font-family: 'Century', serif;
+    background-color: #011109;
+    color: #aad2ba;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: #aad2ba;
+}
+
+button {
+    cursor: pointer;
+    transition: box-shadow 0.6s ease, background-color 0.6s ease, color 0.6s ease;
+}
+
+button:hover {
+    background-color: #b9f5d8;
+    color: #052515;
+    border-color: #b9f5d8;
+    box-shadow: 0 0 10px #b9f5d8; /* Add a soft glow effect */
+}

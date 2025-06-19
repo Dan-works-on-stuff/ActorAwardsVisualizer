@@ -1,10 +1,7 @@
 body {
-    font-family: 'Century', serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #011109;
-    color: #aad2ba;
 }
 
 .search-container {
@@ -43,7 +40,6 @@ body {
     color: #aad2ba;
     border: solid #aad2ba 1px;
     border-radius: 10px;
-    transition: box-shadow 0.6s ease, background-color 0.6s ease, color 0.6s ease;
 }
 
 /* Style for the search button on hover */
@@ -138,12 +134,9 @@ body {
 button {
     padding: 10px 20px;
     font-size: 16px;
-    cursor: pointer;
 }
 
 a{
-    text-decoration: none;
-    color: #aad2ba;
     transition: transform 0.4s ease, color 0.4s ease;
 }
 

@@ -1,14 +1,8 @@
 body{
-    font-family: 'Century', serif;
     background-image: url("../images/background.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    color: #aad2ba;
-    background-color: #011109;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -32,14 +26,12 @@ h1{
     align-self: center;
 }
 h1 a {
-    text-decoration: none;
     display: inline-flex; /* Makes the <a> tag size to its content (the button) */
     vertical-align: middle;
 }
 
 button{
     font-size: 2vw;
-    cursor: pointer;
     width: 15vw;
     color: #aad2ba;
     background-color: transparent;
@@ -47,8 +39,6 @@ button{
     border-radius: 16px;
     border-style: double;
     border-width: 6px;
-    transition: box-shadow 0.6s ease, background-color 0.6s ease, color 0.6s ease;
-
 }
 
 button:hover{
@@ -60,7 +50,6 @@ button:hover{
 
 .linkedin{
     color: #b9f5d8;
-    text-decoration: none;
     font-weight: bold;
     display: inline-block;
     transition: transform 0.4s ease;

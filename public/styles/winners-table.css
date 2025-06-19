@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+    color: #b9f5d8;
+    font-size: 4vw;
+}
+
+.table-container {
+    max-width: 800px;
+    margin: 30px auto;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 70vh;
+    background: #021a10;
+    border-radius: 8px;
+    border: 1px solid #aad2ba;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #aad2ba;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #2a4a3a;
+    white-space: nowrap;
+}
+
+thead th {
+    background-color: #052515;
+    color: #b9f5d8;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #032014;
+}
+
+tbody tr:hover {
+    background-color: #052515;
+    color: #b9f5d8;
+}
