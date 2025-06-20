@@ -22,7 +22,6 @@ function getStats(req, res) {
     });
 }
 
-// New controller function for top actors stats
 function getTopActorsStats(req, res) {
     statsModel.getTopActorsByNominations((err, data) => {
         if (err) {
@@ -47,6 +46,27 @@ function getTopMoviesStats(req, res) {
     });
 }
 
+function getCategoryStats(req, res) {
+    const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
+    const entityName = parsedUrl.searchParams.get('entity');
+
+    if (!entityName) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Entity name is required' }));
+        return;
+    }
+
+    statsModel.getNominationsByCategory(entityName, (err, data) => {
+        if (err) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Error fetching category stats' }));
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(data));
+    });
+}
+
 async function getWinnersTable(req, res) {
     try {
         const winners = await statsModel.getWinners();
@@ -59,10 +79,10 @@ async function getWinnersTable(req, res) {
     }
 }
 
-
 module.exports = {
     getStats,
-    getTopActorsStats, // Export the new controller function
+    getTopActorsStats,
     getTopMoviesStats,
+    getCategoryStats,
     getWinnersTable
 };
