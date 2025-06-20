@@ -6,7 +6,7 @@ h1 {
 
 .table-container {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 30px 2em;
     overflow-x: auto;
     overflow-y: auto;
     max-height: 70vh;

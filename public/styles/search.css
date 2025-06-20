@@ -229,23 +229,29 @@ a:hover {
     transition: .4s;
 }
 
+
+
 .slider:before {
     position: absolute;
     content: "";
-    height: 60px;
-    width: 112px;
-    left: 4px;
-    bottom: 4px;
+    height: 66px;
+    width: 120px;
+    left: 0;
+    bottom: 0;
     background-color: #b9f5d8;
     transition: .4s;
     z-index: 0;
+}
+
+.slider:hover{
+    box-shadow: 0 0 10px #b9f5d8;
 }
 
 input:checked + .slider:before {
     transform: translateX(120px);
 }
 
-input:focus + .slider {
+input:focus + .slider:hover{
     box-shadow: 0 0 10px #b9f5d8;
 }
 

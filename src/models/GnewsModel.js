@@ -1,10 +1,10 @@
 const https = require('https');
-const envconfig = require('../config/envconfig');
-const GNEWS_API_KEY = envconfig.gnews.apiKey;
+const config = require('../config'); // Use the main config file
+const GNEWS_API_KEY = config.gnews.apiKey;
 const GNEWS_BASE_URL = 'gnews.io';
 
 if (!GNEWS_API_KEY) {
-    throw new Error('GNEWS_KEY is not defined. Please ensure it is set in your .env file and loaded correctly in the envconfig.');
+    throw new Error('GNEWS_KEY is not defined. Please ensure it is set in your .env file and loaded correctly in the config.');
 }
 
 /**
@@ -37,7 +37,7 @@ function fetchNews(query) {
                 try {
                     resolve(JSON.parse(data));
                 } catch (e) {
-                    reject(e);
+                    reject(new Error(`Failed to parse JSON response: ${e.message}`));
                 }
             });
         });

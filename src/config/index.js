@@ -7,6 +7,9 @@ module.exports = {
   tmdb: {
     apiKey: process.env.TMDB_KEY,
   },
+  gnews: {
+    apiKey: process.env.GNEWS_KEY,
+  },
   server: {
     port: process.env.PORT || 3000,
   },
