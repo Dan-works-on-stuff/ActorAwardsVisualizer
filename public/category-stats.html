@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nominations by Category</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <link rel="stylesheet" href="styles/globals.css">
     <link rel="stylesheet" href="styles/category-stats.css">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 </head>
 <body>
 <h1>Nominations by Category</h1>
@@ -13,7 +15,7 @@
     <input type="text" id="entityInput" placeholder="Enter actor or movie name">
     <button id="searchButton">Search</button>
 </div>
-<div class="chart-container" style="position: relative; height:60vh; width:90vw; margin: auto;">
+<div class="chart-container">
     <canvas id="categoryChart"></canvas>
 </div>
 <script src="/utils/categoryStatsHelper.js"></script>

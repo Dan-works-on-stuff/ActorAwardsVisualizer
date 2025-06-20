@@ -117,7 +117,7 @@ async function processCSV() {
                     console.log('All rows processed successfully!');
                     resolve();
                 } catch (err) {
-                    reject(err);
+                    reject(new Error(`CSV processing failed: ${err.message}`));
                 }
             })
             .on('error', reject);

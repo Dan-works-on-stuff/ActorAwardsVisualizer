@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Chart.js" level="application" />
+    <orderEntry type="library" name="chartjs-plugin-datalabels" level="application" />
   </component>
 </module>

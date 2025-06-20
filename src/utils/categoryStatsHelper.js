@@ -45,6 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderPieChart = (labels, data) => {
         const ctx = document.getElementById('categoryChart').getContext('2d');
+        // A more distinct color palette with mostly greens and one teal
+        const backgroundColors = [
+            'rgba(185, 245, 216, 0.7)', // light mint
+            'rgba(103, 199, 167, 0.7)', // medium green
+            'rgba(46, 139, 87, 0.7)',   // sea green
+            'rgba(153, 226, 180, 0.7)', // light green
+            'rgba(29, 89, 57, 0.7)',    // dark green
+            'rgba(117, 201, 183, 0.7)', // teal
+            'rgba(136, 216, 176, 0.7)', // medium mint
+            'rgba(69, 179, 157, 0.7)',  // turquoise-green
+            'rgba(42, 125, 79, 0.7)',   // forest green
+            'rgba(14, 54, 33, 0.7)'     // very dark green
+        ];
+        const borderColors = [
+            'transparent', 'transparent', 'transparent', 'transparent',
+            'transparent', 'transparent', 'transparent', 'transparent',
+            'transparent', 'transparent'
+        ];
+
+        // Helper to determine a readable contrasting color (dark green or white)
+        const getContrastingColor = (color) => {
+            const rgb = color.match(/\d+/g);
+            if (!rgb) return '#052515'; // Default to dark green
+            // Calculate luminance to determine if the color is light or dark
+            const luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]);
+            // Use white for dark backgrounds, and dark green for light backgrounds
+            return luminance > 140 ? '#052515' : '#FFFFFF';
+        };
+
         return new Chart(ctx, {
             type: 'pie',
             data: {
@@ -52,30 +81,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: 'Nominations by Category',
                     data: data,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)',
-                        'rgba(255, 159, 64, 0.6)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
+                    backgroundColor: backgroundColors,
+                    borderColor: borderColors,
                     borderWidth: 1
                 }]
             },
             options: {
                 maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        bottom: 25,
+                        right: 30
+                    }
+                },
                 title: {
                     display: true,
-                    text: 'Nominations by Category'
+                    text: 'Nominations by Category',
+                    fontColor: '#b9f5d8',
+                    fontSize: 18
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#aad2ba'
+                    },
+                    // padding: {
+                    //
+                    // }
+                },
+                tooltips: {
+                    enabled: false
+                },
+                plugins: {
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            const datapoints = ctx.chart.data.datasets[0].data;
+                            const total = datapoints.reduce((total, datapoint) => total + datapoint, 0);
+                            const percentage = (value / total * 100).toFixed(1) + '%';
+                            if ((value / total) < 0.03) {
+                                return '';
+                            }
+                            return percentage;
+                        },
+                        color: (context) => {
+                            const bgColor = context.dataset.backgroundColor[context.dataIndex];
+                            return getContrastingColor(bgColor);
+                        },
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        textAlign: 'center'
+                    }
                 }
             }
         });
