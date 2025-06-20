@@ -5,10 +5,10 @@ body {
 }
 
 .search-container {
-    margin-bottom: 20px; /* Add some space below the search bar */
-    display: flex; /* Use flexbox to align input and button horizontally */
-    gap: 10px; /* Add space between the input and the button */
-    align-items: center; /* Center items vertically */
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 #search-input {
@@ -20,35 +20,33 @@ body {
     border: 1px solid #aad2ba;
     box-sizing: border-box;
     border-radius: 10px;
-    transition: box-shadow 0.2s ease; /* Add this for a smooth transition */
+    transition: box-shadow 0.2s ease;
 }
 
 #search-input:focus {
-    outline: none; /* Remove the default outline */
-    box-shadow: 0 0 10px #b9f5d8; /* Add a soft glow effect */
+    outline: none;
+    box-shadow: 0 0 10px #b9f5d8;
 }
 
-/* Style for the placeholder text inside the search input */
 #search-input::placeholder {
     color: #aad2ba;
     opacity: 0.6;
 }
 
-/* Style for the search button */
 #search-button {
     background-color: #011109;
     color: #aad2ba;
     border: solid #aad2ba 1px;
     border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
 }
 
-/* Style for the search button on hover */
-#search-button:hover{
+#search-button:hover {
     background-color: #b9f5d8;
     color: #052515;
-
     border-color: #b9f5d8;
-    box-shadow: 0 0 10px #b9f5d8; /* Add a soft glow effect */
+    box-shadow: 0 0 10px #b9f5d8;
 }
 
 /* Profile Section */
@@ -74,7 +72,7 @@ body {
     color: #b9f5d8;
 }
 
-/* Movie Grid */
+/* Grid for Movies and News */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -82,26 +80,32 @@ body {
     margin-top: 20px;
 }
 
-.movie-card {
+/* Common Card Styles */
+.movie-card,
+.news-article-card {
     background-color: #021a10;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid #aad2ba;
+    color: #aad2ba;
 }
 
-.movie-card:hover {
+.movie-card:hover,
+.news-article-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(185, 245, 216, 0.2);
 }
 
-.movie-card a {
+.movie-card a,
+.news-article-card a {
     text-decoration: none;
     color: inherit;
     display: block;
 }
 
-.movie-card img {
+.movie-card img,
+.news-article-card img {
     width: 100%;
     display: block;
 }
@@ -116,6 +120,7 @@ body {
     color: #aad2ba;
 }
 
+/* Movie-specific styles */
 .movie-info {
     padding: 15px;
 }
@@ -131,15 +136,123 @@ body {
     color: #8dae9b;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
+/* News-specific styles */
+.news-article-card img {
+    border-bottom: 1px solid #aad2ba;
 }
 
-a{
+.article-info {
+    padding: 15px;
+}
+
+.article-info h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #b9f5d8;
+}
+
+.article-info p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.article-info span {
+    font-size: 0.8em;
+    color: #8dae9b;
+}
+
+a {
     transition: transform 0.4s ease, color 0.4s ease;
 }
 
 a:hover {
     color: #b9f5d8;
+}
+
+/* Styles for the toggle switch */
+#view-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 240px;
+    height: 68px;
+}
+
+.switch::before,
+.switch::after {
+    color: #aad2ba;
+    mix-blend-mode: difference;
+    font-weight: bold;
+    font-size: 22px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.switch::before {
+    content: 'Movies';
+    left: 0;
+}
+
+.switch::after {
+    content: 'News';
+    right: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #021a10;
+    border: 1px solid #aad2ba;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 60px;
+    width: 112px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #b9f5d8;
+    transition: .4s;
+    z-index: 0;
+}
+
+input:checked + .slider:before {
+    transform: translateX(120px);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 10px #b9f5d8;
+}
+
+.slider.round {
+    border-radius: 68px;
+}
+
+.slider.round:before {
+    border-radius: 60px;
 }
