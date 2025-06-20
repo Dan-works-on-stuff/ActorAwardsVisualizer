@@ -1,11 +1,13 @@
 const { URL } = require('url');
 const path = require('path');
-const newsController = require('./controllers/newsController');
+const newsController = require('./controllers/SearchMoviesController');
 const statsController = require('./controllers/statsController');
+const gNewsController = require('./controllers/GNewsController'); // Import GNewsController
 const { serveStaticFile } = require('./utils/staticFileHelper');
 
 const apiRoutes = {
     '/api/celebrity-news': newsController.getCelebrityNews,
+    '/api/gnews': gNewsController.getGNews, // Add GNews route
     '/api/stats': statsController.getStats,
     '/api/top-actors-stats': statsController.getTopActorsStats,
     '/api/top-movies-stats': statsController.getTopMoviesStats,

@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-const { fetchFromTMDB } = require('../models/newsModel');
+const { fetchFromTMDB } = require('../models/SearchMoviesModel');
 
 const dbPath = path.resolve(__dirname, 'actors_awards.db');
 
