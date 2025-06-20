@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentChart = null;
 
+    const entityInput = document.getElementById('entityInput');
+
+    entityInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            // Prevent the default action, e.g., form submission
+            event.preventDefault();
+            // Trigger the search button click
+            document.getElementById('searchButton').click();
+        }
+    });
+
     const fetchData = (entityName) => {
         const url = `/api/category-stats?entity=${encodeURIComponent(entityName)}`;
 
@@ -19,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Could not retrieve category statistics.');
             });
     };
+
+
 
     const renderChart = (data) => {
         const labels = data.map(item => item.category);

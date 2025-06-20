@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: 'Total Nominations',
                     data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(170, 210, 186, 0.6)',
+                    borderColor: '#b9f5d8',
                     borderWidth: 1
                 }]
             },
@@ -56,20 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 title: {
                     display: true,
-                    text: `Top ${visibleItems} ${currentView.charAt(0).toUpperCase() + currentView.slice(1)} by Nominations`
+                    text: `Top ${visibleItems} ${currentView.charAt(0).toUpperCase() + currentView.slice(1)} by Nominations`,
+                    fontColor: '#b9f5d8',
+                    fontSize: 16
                 },
                 scales: {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            stepSize: 1
+                            stepSize: 1,
+                            fontColor: '#aad2ba'
+                        },
+                        gridLines: {
+                            color: 'rgba(170, 210, 186, 0.2)'
                         }
                     }],
                     xAxes: [{
                         ticks: {
                             autoSkip: false,
                             maxRotation: 90,
-                            minRotation: 45
+                            minRotation: 45,
+                            fontColor: '#aad2ba'
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }]
                 }
