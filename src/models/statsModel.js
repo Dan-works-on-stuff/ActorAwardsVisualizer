@@ -1,6 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-// const db= require('../data/actors_awards.db');
 const dbPath = path.join(__dirname, '..', 'data', 'actors_awards.db');
 
 function getActorNominations(actorName, callback) {
@@ -34,7 +33,6 @@ function getActorNominations(actorName, callback) {
     });
 }
 
-// New function to get top actors by nominations
 function getTopActorsByNominations(callback) {
     const db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
@@ -43,7 +41,6 @@ function getTopActorsByNominations(callback) {
         }
     });
 
-    // Corrected to 10 years and variable renamed for clarity
     const tenYearsAgo = new Date().getFullYear() - 10;
 
     const query = `
@@ -58,7 +55,6 @@ function getTopActorsByNominations(callback) {
         ORDER BY nomination_count DESC;
     `;
 
-    // Pass the correct variable to the query
     db.all(query, [tenYearsAgo], (err, rows) => {
         if (err) {
             console.error('Error running query', err.message);
@@ -103,39 +99,50 @@ function getTopMoviesByNominations(callback) {
     });
 }
 
-// function getWinners() {
-//     return new Promise((resolve, reject) => {
-//         const sql = `
-//             SELECT
-//                 a.name,
-//                 SUM(CASE WHEN n.won = 1 THEN 1 ELSE 0 END) as wins,
-//                 COUNT(n.id) as nominations
-//             FROM Actors a
-//             JOIN Nominations n ON a.id = n.actor_id
-//             WHERE a.name IS NOT NULL AND a.name != ''
-//             GROUP BY a.name
-//             HAVING wins > 0
-//             ORDER BY wins DESC, nominations DESC;
-//         `;
-//         db.all(sql, [], (err, rows) => {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                 resolve(rows);
-//             }
-//         });
-//     });
-// }
-
-function getWinners() {
+function getNominationsByCategory(entityName, callback) {
     const db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
             console.error('Error opening database', err.message);
-            return Promise.reject(err);
+            return callback(err);
         }
     });
 
+    const query = `
+        SELECT c.name AS category, COUNT(n.id) AS nomination_count, 'actor' as type
+        FROM Nominations n
+                 JOIN Actors a ON n.actor_id = a.id
+                 JOIN Categories c ON n.category_id = c.id
+        WHERE LOWER(a.name) = LOWER(?)
+        GROUP BY c.name
+        UNION ALL
+        SELECT c.name AS category, COUNT(n.id) AS nomination_count, 'movie' as type
+        FROM Nominations n
+                 JOIN Movies m ON n.movie_id = m.id
+                 JOIN Categories c ON n.category_id = c.id
+        WHERE LOWER(m.title) = LOWER(?)
+        GROUP BY c.name
+    `;
+
+    db.all(query, [entityName, entityName], (err, rows) => {
+        if (err) {
+            console.error('Error running query', err.message);
+            db.close();
+            return callback(err);
+        }
+        db.close();
+        callback(null, rows);
+    });
+}
+
+function getWinners() {
     return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(dbPath, (err) => {
+            if (err) {
+                console.error('Error opening database', err.message);
+                return reject(err);
+            }
+        });
+
         const sql = `
             SELECT
                 a.name,
@@ -149,7 +156,11 @@ function getWinners() {
             ORDER BY wins DESC, nominations DESC;
         `;
         db.all(sql, [], (err, rows) => {
-            db.close();
+            db.close((closeErr) => {
+                if (closeErr) {
+                    console.error('Error closing database', closeErr.message);
+                }
+            });
             if (err) {
                 console.error('Error running query', err.message);
                 reject(err);
@@ -160,12 +171,10 @@ function getWinners() {
     });
 }
 
-
-
-
 module.exports = {
     getActorNominations,
-    getTopActorsByNominations, // Export the new function
+    getTopActorsByNominations,
     getTopMoviesByNominations,
+    getNominationsByCategory,
     getWinners
 };

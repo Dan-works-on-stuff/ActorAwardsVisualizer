@@ -88,8 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('showMore').addEventListener('click', () => {
-        visibleItems += 5;
-        renderChart();
+        if (visibleItems < currentData.length) {
+            visibleItems = Math.min(visibleItems + 5, currentData.length);
+            renderChart();
+        }
     });
 
     document.getElementById('showLess').addEventListener('click', () => {
