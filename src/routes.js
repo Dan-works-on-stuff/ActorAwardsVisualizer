@@ -2,17 +2,19 @@ const { URL } = require('url');
 const path = require('path');
 const newsController = require('./controllers/SearchMoviesController');
 const statsController = require('./controllers/statsController');
-const gNewsController = require('./controllers/GNewsController'); // Import GNewsController
+const gNewsController = require('./controllers/GNewsController');
+const adminController = require('./controllers/adminController'); // Import adminController
 const { serveStaticFile } = require('./utils/staticFileHelper');
 
 const apiRoutes = {
     '/api/celebrity-news': newsController.getCelebrityNews,
-    '/api/gnews': gNewsController.getGNews, // Add GNews route
+    '/api/gnews': gNewsController.getGNews,
     '/api/stats': statsController.getStats,
     '/api/top-actors-stats': statsController.getTopActorsStats,
     '/api/top-movies-stats': statsController.getTopMoviesStats,
     '/api/category-stats': statsController.getCategoryStats,
-    '/api/winners': statsController.getWinnersTable
+    '/api/winners': statsController.getWinnersTable,
+    '/api/admin/verify': adminController.verifyPassword // Add verification route
 };
 
 // Define directories
