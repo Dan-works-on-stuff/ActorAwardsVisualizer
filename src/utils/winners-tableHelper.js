@@ -1,10 +1,22 @@
-async function fetchWinners() {
-    try {
-        const response = await fetch('/api/winners');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+document.addEventListener('DOMContentLoaded', () => {
+    let winnersData = [];
+
+    const fetchWinners = async () => {
+        try {
+            const response = await fetch('/api/winners');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            winnersData = await response.json();
+            renderTable(winnersData);
+        } catch (error) {
+            console.error('Error fetching winners:', error);
+            const tbody = document.getElementById('winners-tbody');
+            tbody.innerHTML = '<tr><td colspan="3">Failed to load data.</td></tr>';
         }
-        const winners = await response.json();
+    };
+
+    const renderTable = (winners) => {
         const tbody = document.getElementById('winners-tbody');
         tbody.innerHTML = ''; // Clear existing data
 
@@ -23,11 +35,16 @@ async function fetchWinners() {
             `;
             tbody.innerHTML += row;
         });
-    } catch (error) {
-        console.error('Error fetching winners:', error);
-        const tbody = document.getElementById('winners-tbody');
-        tbody.innerHTML = '<tr><td colspan="3">Failed to load data.</td></tr>';
-    }
-}
+    };
 
-document.addEventListener('DOMContentLoaded', fetchWinners);
+    document.getElementById('exportCsv').addEventListener('click', () => {
+        const headers = {
+            name: 'Name',
+            wins: 'Wins',
+            nominations: 'Nominations'
+        };
+        exportDataAsCSV(winnersData, headers, 'award-winners.csv');
+    });
+
+    fetchWinners();
+});

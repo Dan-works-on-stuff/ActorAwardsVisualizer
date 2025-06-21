@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="styles/winners-table.css">
 </head>
 <body>
-<h1>Award Winners</h1>
+<header>
+    <h1>Award Winners</h1>
+    <div class="export-buttons">
+        <button id="exportCsv">Export to CSV</button>
+    </div>
+</header>
 <div class="table-container">
     <table>
         <thead>
@@ -24,6 +29,7 @@
     </table>
 </div>
 
+<script src="/utils/exportHelper.js"></script>
 <script src="/utils/winners-tableHelper.js"></script>
 </body>
 </html>

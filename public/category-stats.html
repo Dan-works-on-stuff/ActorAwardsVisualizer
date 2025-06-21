@@ -14,10 +14,17 @@
 <div class="search-container">
     <input type="text" id="entityInput" placeholder="Enter actor or movie name">
     <button id="searchButton">Search</button>
+    <button id="exportCsv">Export to CSV</button>
+    <button id="exportWebp">Export to WebP</button>
+    <button id="exportSvg">Export to SVG</button>
 </div>
 <div class="chart-container">
     <canvas id="categoryChart"></canvas>
 </div>
+
+
+<script src="/utils/canvas2svg.js"></script>
+<script src="/utils/exportHelper.js"></script>
 <script src="/utils/categoryStatsHelper.js"></script>
 </body>
 </html>
