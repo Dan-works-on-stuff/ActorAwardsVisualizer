@@ -4,6 +4,7 @@ const newsController = require('./controllers/SearchMoviesController');
 const statsController = require('./controllers/statsController');
 const gNewsController = require('./controllers/GNewsController');
 const adminController = require('./controllers/adminController'); // Import adminController
+const reportController = require('./controllers/reportController');
 const { serveStaticFile } = require('./utils/staticFileHelper');
 
 const apiRoutes = {
@@ -14,7 +15,8 @@ const apiRoutes = {
     '/api/top-movies-stats': statsController.getTopMoviesStats,
     '/api/category-stats': statsController.getCategoryStats,
     '/api/winners': statsController.getWinnersTable,
-    '/api/admin/verify': adminController.verifyPassword // Add verification route
+    '/api/admin/verify': adminController.verifyPassword, // Add verification route
+    '/api/report': reportController.createReport
 };
 
 // Define directories
