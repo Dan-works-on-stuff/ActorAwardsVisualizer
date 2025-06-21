@@ -87,6 +87,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const exportCSV = () => {
+        const dataToExport = currentData.slice(0, visibleItems);
+        if (dataToExport.length === 0) {
+            alert('No data to export.');
+            return;
+        }
+
+        const header = `"${currentView === 'actors' ? 'Actor' : 'Movie'}","Nominations"\n`;
+        const csvRows = dataToExport.map(item => {
+            const name = item.name || item.title;
+            return `"${name.replace(/"/g, '""')}",${item.nomination_count}`;
+        });
+
+        const csvString = header + csvRows.join('\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `top-${currentView}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const exportImage = (format) => {
+        if (!currentChart) {
+            alert('No chart to export.');
+            return;
+        }
+        const mimeType = `image/${format}`;
+        const canvas = currentChart.canvas;
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.fillStyle = '#FFFFFF';
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.drawImage(canvas, 0, 0);
+
+        const dataUrl = tempCanvas.toDataURL(mimeType);
+        const link = document.createElement('a');
+        link.setAttribute('href', dataUrl);
+        link.setAttribute('download', `top-${currentView}-chart.${format}`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     document.getElementById('showActors').addEventListener('click', () => {
         currentView = 'actors';
         fetchData('actors');
@@ -107,6 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('showLess').addEventListener('click', () => {
         visibleItems = Math.max(5, visibleItems - 5);
         renderChart();
+    });
+
+    document.getElementById('exportCsv').addEventListener('click', exportCSV);
+    document.getElementById('exportWebp').addEventListener('click', () => exportImage('webp'));
+    document.getElementById('exportSvg').addEventListener('click', () => {
+        alert('SVG export is not supported with the current chart library version. Please consider upgrading to a newer version of Chart.js for this feature.');
     });
 
     // Initial fetch
