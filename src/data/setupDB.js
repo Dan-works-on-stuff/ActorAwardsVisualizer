@@ -83,6 +83,18 @@ db.serialize(() => {
             console.log('Table "Nominations" created or already exists.');
         }
     });
+
+    // Create the Report table
+    db.run(`CREATE TABLE IF NOT EXISTS Report (
+                                                  reportId INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                  message TEXT
+            )`, (err) => {
+        if (err) {
+            console.error('Error creating Report table:', err.message);
+        } else {
+            console.log('Table "Report" created or already exists.');
+        }
+    });
 });
 
 // Close the database connection
