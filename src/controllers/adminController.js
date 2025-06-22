@@ -25,6 +25,7 @@ function verifyPassword(req, res) {
                 res.end(JSON.stringify({ success: false, message: 'Incorrect password' }));
             }
         } catch (error) {
+            console.error(error.message);
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: false, message: 'Invalid request' }));
         }
