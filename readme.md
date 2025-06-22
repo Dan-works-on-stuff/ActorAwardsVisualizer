@@ -32,7 +32,7 @@ _An example of the category statistics visualization._
 
 ## 🛠️ Tech Stack
 
-*   **Backend:** Node.js, Express.js
+*   **Backend:** Node.js
 *   **Frontend:** HTML, CSS, Vanilla JavaScript
 *   **Database:** SQLite
 
@@ -67,7 +67,7 @@ You need to have Node.js and npm installed on your machine.
     ```
 5.  Start the server:
     ```bash
-    node server.js
+    npm run dev
     ```
 6.  Open your browser and navigate to `http://localhost:3000` to see the application in action.
 
@@ -82,7 +82,7 @@ ActorAwardsVisualizer/
 │   ├── models/          # Data interaction logic
 │   ├── utils/           # Helper functions
 │   └── routes.js        # API route definitions
-├── server.js            # The main Express server entry point
+├── server.js            # The main NoddeJS server entry point
 └── package.json         # Project dependencies and scripts
 ```
 
