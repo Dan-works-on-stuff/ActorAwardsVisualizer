@@ -1,3 +1,7 @@
+html {
+    overflow: hidden;
+}
+
 body{
     background-image: url("../images/background.svg");
     background-size: cover;
@@ -7,6 +11,9 @@ body{
     justify-content: center;
     flex-direction: column;
     padding-bottom: 5em; /* Add padding to prevent content from hiding behind the fixed footer */
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
 }
 .container_title {
     align-items: center;
