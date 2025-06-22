@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Page</title>
-    <!-- Link to the same stylesheets as index.html for consistent design -->
     <link rel="stylesheet" href="styles/globals.css">
-    <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap" rel="stylesheet">
@@ -15,55 +14,52 @@
 
 <!-- Main content initially hidden -->
 <div id="admin-content" style="display:none;">
-    <div class="container_title">
-        <img alt="logo" class="logo" src="images/Logo.svg">
-        <div class="title-and-buttons">
-            <h1>SAG Chronicles - Admin</h1>
-            <div class="button-container">
-                <!-- Navigation back to home -->
-                <a href="index.html">
-                    <button class="search_button">Home</button>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div style="padding: 20px;">
-        <h2>Administration Module</h2>
-        <p>Welcome to the admin page.</p>
-        <!-- Admin functionalities can be added here -->
+    <header>
+        <h1>Administration Module</h1>
+    </header>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Report ID</th>
+                <th>Message</th>
+            </tr>
+            </thead>
+            <tbody id="admin-tbody">
+            <!-- Data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
     </div>
     <footer>
-        by
-        <a class="linkedin" href="https://www.linkedin.com/in/radu-dan-stefan/">Radu Dan</a>
-        &
-        <a class="linkedin" href="https://www.linkedin.com/in/adrian-popa-957643239/">Popa Adrian</a>
+        <a href="index.html">
+            <button class="home_button">Home</button>
+        </a>
+        <div class="authors">
+            by
+            <a class="linkedin" href="https://www.linkedin.com/in/radu-dan-stefan/">Radu Dan</a>
+            &
+            <a class="linkedin" href="https://www.linkedin.com/in/adrian-popa-957643239/">Popa Adrian</a>
+        </div>
     </footer>
 </div>
 
 <script>
-    // Self-invoking function to run on page load
+    // Password verification logic remains the same
     (function() {
         const password = prompt("Please enter the admin password:");
-
         if (password === null) {
-            // User clicked "Cancel" on the prompt, redirect to home
             window.location.href = 'index.html';
             return;
         }
-
-        // Send the password to the server for verification
         fetch('/api/admin/verify', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: password }),
         })
             .then(response => {
                 if (response.ok) {
-                    document.getElementById('admin-content').style.display = 'block';
+                    document.getElementById('admin-content').style.display = 'flex';
                 } else {
-                    // If password is wrong, show an error and redirect
                     alert("Wrong password. You will be redirected to the home page.");
                     window.location.href = 'index.html';
                 }
@@ -75,6 +71,7 @@
             });
     })();
 </script>
+<script src="/utils/adminReportRetrieveHelper.js"></script>
 
 </body>
 </html>

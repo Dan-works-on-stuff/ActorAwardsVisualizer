@@ -15,7 +15,8 @@ const apiRoutes = {
     '/api/top-movies-stats': statsController.getTopMoviesStats,
     '/api/category-stats': statsController.getCategoryStats,
     '/api/winners': statsController.getWinnersTable,
-    '/api/admin/verify': adminController.verifyPassword, // Add verification route
+    '/api/admin/verify': adminController.verifyPassword,
+    '/api/reports': adminController.getReports, // Route for fetching reports
     '/api/report': reportController.createReport
 };
 

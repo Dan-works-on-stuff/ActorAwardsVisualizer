@@ -29,9 +29,6 @@
             <a href="category-stats.html">
                 <button class="stats_button">Category Stats</button>
             </a>
-            <a href="admin.html">
-                <button class="stats_button">Admin</button>
-            </a>
         </div>
     </div>
 </div>
@@ -42,5 +39,31 @@
     &
     <a class="linkedin" href="https://www.linkedin.com/in/adrian-popa-957643239/">Popa Adrian</a>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const logoElement = document.querySelector('.logo');
+        let clickCount = 0;
+        let clickTimer = null;
+
+        logoElement.addEventListener('click', () => {
+            clickCount++;
+
+            if (clickTimer) {
+                clearTimeout(clickTimer);
+            }
+
+            // Reset the count if there's a pause of more than 2 seconds between clicks
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 2000);
+
+            // Redirect to admin page on the 7th click
+            if (clickCount === 7) {
+                window.location.href = 'admin.html';
+            }
+        });
+    });
+</script>
 </body>
 </html>

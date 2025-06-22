@@ -26,3 +26,11 @@ button:hover {
     border-color: #b9f5d8;
     box-shadow: 0 0 10px #b9f5d8; /* Add a soft glow effect */
 }
+
+
+#reportButton:hover{
+    background-color: #732222FF;
+    color: #FFFFFF;
+    border-color: #732222FF;
+    box-shadow: 0 0 10px #732222FF;
+}

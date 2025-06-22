@@ -5,19 +5,27 @@ body {
     flex-direction: column;
 }
 
+#admin-content {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    flex-shrink: 0;
+}
+
 h1 {
     text-align: center;
     color: #b9f5d8;
     font-size: clamp(2rem, 4vw, 3.5rem);
     margin: 2vh auto;
-    flex-shrink: 0;
 }
 
 .table-container {
     max-width: 800px;
     width: calc(100% - 4em);
-    margin: 0 auto 6vh;
-    overflow-x: auto;
+    margin: 0 auto 2vh;
     overflow-y: auto;
     background: #021a10;
     border-radius: 8px;
@@ -56,15 +64,33 @@ tbody tr:hover {
     color: #b9f5d8;
 }
 
-.export-buttons{
-    align-items: center;
-    justify-content: center;
+footer {
     display: flex;
-    margin-bottom: 2em;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    flex-shrink: 0;
+    margin:2em;
 }
 
-#exportCsv, #reportButton{
+footer .authors {
+    text-align: right;
+}
+
+/*.search_button {*/
+/*    padding: 8px 16px;*/
+/*    background-color: #052515;*/
+/*    color: #b9f5d8;*/
+/*    border: 1px solid #aad2ba;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.search_button:hover {*/
+/*    background-color: #083b22;*/
+/*}*/
+
+.home_button {
     background-color: #011109;
     color: #aad2ba;
     border: solid #aad2ba 1px;
@@ -72,7 +98,8 @@ tbody tr:hover {
     padding: 10px 20px;
     font-size: 16px;
 }
-#exportCsv:hover {
+
+.home_button:hover {
     background-color: #b9f5d8;
     color: #052515;
     border-color: #b9f5d8;
