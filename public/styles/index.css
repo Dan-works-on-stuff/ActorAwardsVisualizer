@@ -6,6 +6,7 @@ body{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-bottom: 5em; /* Add padding to prevent content from hiding behind the fixed footer */
 }
 .container_title {
     align-items: center;
@@ -68,19 +69,45 @@ button:hover{
     color: #b9f5d8;
     font-weight: bold;
     display: inline-block;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, color 0.4s ease;
 }
 
 
 .linkedin:hover {
-    color: #aad2ba;
+    color: #0a66c2;
     transform: scale(1.05);
 }
 
 
-footer{
-    text-align: right;
-    margin-right: 2em;
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #06180f;
+    color: #aad2ba;
+    text-align: center;
+    padding: 1.5em;
+}
+
+.footer-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.railway, .TMDB{
+    color: #b9f5d8;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.4s ease;
+}
+
+
+.railway:hover, .TMDB:hover {
+    color: #aad2ba;
+    transform: scale(1.05);
 }
 
 
@@ -107,9 +134,6 @@ footer{
     h1 {
         font-size: 8vw;
     }
-    footer{
-        margin-top: 2em;
-    }
 }
 
 @media (max-width: 799px) {
@@ -123,6 +147,6 @@ footer{
         font-size: 3.5vw;
     }
     footer{
-    font-size: 3vw;
+        font-size: 3vw;
     }
 }
