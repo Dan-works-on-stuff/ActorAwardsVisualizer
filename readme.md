@@ -1,5 +1,3 @@
-Of course. Here is a `readme.md` file for your project.
-
 # Actor Awards Visualizer
 
 `[INSERT LOGO HERE]`
