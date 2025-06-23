@@ -95,13 +95,7 @@ footer {
     color: #aad2ba;
     text-align: center;
     padding: 1.5em;
-}
-
-.footer-right {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    will-change: transform;
 }
 
 .railway, .TMDB{
