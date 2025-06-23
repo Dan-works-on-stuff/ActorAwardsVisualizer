@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = document.getElementById('categoryChart').getContext('2d');
         const backgroundColors = ['rgba(185, 245, 216, 0.7)', 'rgba(103, 199, 167, 0.7)', 'rgba(46, 139, 87, 0.7)', 'rgba(153, 226, 180, 0.7)', 'rgba(29, 89, 57, 0.7)', 'rgba(117, 201, 183, 0.7)', 'rgba(136, 216, 176, 0.7)', 'rgba(69, 179, 157, 0.7)', 'rgba(42, 125, 79, 0.7)', 'rgba(14, 54, 33, 0.7)'];
         const borderColors = Array(10).fill('transparent');
+        const legendPosition = window.innerWidth < 700 ? 'top' : 'right';
 
         const getContrastingColor = (color) => {
             const rgb = color.match(/\d+/g);
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             options: {
                 maintainAspectRatio: false,
                 title: { display: true, text: `Nominations by Category for ${currentEntityName}`, fontColor: '#b9f5d8', fontSize: 18 },
-                legend: { display: true, position: 'right', labels: { fontColor: '#aad2ba' } },
+                legend: { display: true, position: legendPosition, labels: { fontColor: '#aad2ba' } },
                 plugins: {
                     datalabels: {
                         formatter: (value, ctx) => {
@@ -82,6 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             searchButton.click();
         }
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            if (currentData.length > 0) {
+                renderChart(currentData);
+            }
+        }, 250);
     });
 
     document.getElementById('exportCsv').addEventListener('click', () => {

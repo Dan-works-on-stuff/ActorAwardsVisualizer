@@ -1,16 +1,13 @@
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
     margin: 0;
-    overflow: hidden; /* Guarantees no scrolling */
+    /* Removed flex properties to allow natural document flow and scrolling */
 }
 
 .chart-container {
-    flex-grow: 1; /* Allows the container to fill the remaining vertical space */
     position: relative;
     width: 60vw;
-    margin: 0 auto 5vh; /* Centers horizontally and adds some bottom margin */
+    height: 70vh; /* Explicit height for the chart container */
+    margin: 20px auto 5vh; /* Adjusted margin for spacing */
 }
 
 .search-container {
@@ -26,9 +23,9 @@ body {
 h1 {
     text-align: center;
     color: #b9f5d8;
-    font-size: clamp(1rem, 4vh, 3.5rem);
+    font-size: clamp(1rem, 7vw, 3.5rem);
     margin: 2vh auto;
-    flex-shrink: 0;
+    /* flex-shrink: 0; removed as body is no longer a flex container */
 }
 
 
@@ -103,3 +100,21 @@ h1 {
     box-shadow: 0 0 10px #b9f5d8;
 }
 
+@media (max-width: 700px) {
+
+    .search-container {
+        flex-direction: column;
+        max-width: 90vw;
+    }
+
+    .chart-container {
+        width: 95vw;
+        height: 65vh; /* Adjust height for smaller viewports */
+    }
+
+    .export-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+    }
+}
