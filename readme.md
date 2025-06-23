@@ -19,13 +19,13 @@ A web application for visualizing and exploring data about actor awards, specifi
 ![Actor Awards Visualizer landing page](./Screenshots/landing-page.png)
 _The main landing page with navigation to all features._
 
-![INSERT SCREENSHOT OF WINNERS TABLE HERE](./Screenshots/WinnersTable.png)
+![INSERT SCREENSHOT OF WINNERS TABLE HERE](./Screenshots/WinnersTable.PNG)
 _The filterable and sortable winners table._
 
-![INSERT SCREENSHOT OF SEARCH PAGE HERE](./Screenshots/Search.png)
+![INSERT SCREENSHOT OF SEARCH PAGE HERE](./Screenshots/Search.PNG)
 _The search interface for finding actors or movies._
 
-![INSERT SCREENSHOT OF CATEGORY STATS HERE](./Screenshots/Category.png)
+![INSERT SCREENSHOT OF CATEGORY STATS HERE](./Screenshots/Category.PNG)
 _An example of the category statistics visualization._
 
 ## 🛠️ Tech Stack
