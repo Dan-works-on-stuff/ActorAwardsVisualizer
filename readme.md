@@ -1,6 +1,6 @@
 # Actor Awards Visualizer
 
-`[INSERT LOGO HERE]`
+![Actor Awards Visualizer Logo](./public/images/logo.png)
 
 A web application for visualizing and exploring data about actor awards, specifically focusing on the Screen Actors Guild Awards. This project provides various tools to search, filter, and analyze awards data, offering insights into winning actors, movies, and categories over the years.
 
@@ -11,12 +11,12 @@ A web application for visualizing and exploring data about actor awards, specifi
 *   **📊 Category Statistics:** View detailed statistics and visualizations for each award category.
 *   **🌟 Top Actors:** Discover the actors with the most awards.
 *   **📰 News Integration:** Get the latest news related to the movie industry.
-*   **ექსპორტი Export Data:** Export filtered data in various formats like CSV, JSON, and XML.
+*   **Export Data:** Export filtered data in various formats like CSV, JSON, and XML.
 *   **🔐 Admin Panel:** A dedicated interface for administrative tasks.
 
 ## 📸 Screenshots
 
-`[INSERT SCREENSHOT OF HOMEPAGE HERE]`
+![Actor Awards Visualizer landing page](./Screenshots/landing-page.png)
 _The main landing page with navigation to all features._
 
 `[INSERT SCREENSHOT OF WINNERS TABLE HERE]`

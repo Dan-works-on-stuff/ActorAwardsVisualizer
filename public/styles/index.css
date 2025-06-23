@@ -157,3 +157,9 @@ footer {
         font-size: 3vw;
     }
 }
+
+@media (max-width: 499px) {
+    .logo {
+        margin-top: -20vh;
+    }
+}
