@@ -43,6 +43,10 @@ h1 {
     text-align: center;
     align-self: center;
     margin-bottom: 0.5em;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 button {
