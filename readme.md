@@ -1,6 +1,6 @@
 # Actor Awards Visualizer
 
-![Actor Awards Visualizer Logo](./public/images/logo.png)
+![Actor Awards Visualizer Logo](./public/images/Logo.png)
 
 A web application for visualizing and exploring data about actor awards, specifically focusing on the Screen Actors Guild Awards. This project provides various tools to search, filter, and analyze awards data, offering insights into winning actors, movies, and categories over the years.
 
