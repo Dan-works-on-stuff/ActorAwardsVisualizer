@@ -7,7 +7,7 @@ const GNewsModel = require('../models/GNewsModel');
 async function getGNews(req, res) {
     try {
         const query =
-            req.query?.query ||
+            // req.query?.query ||
             (req.url && new URL(req.url, `https://${req.headers.host}`).searchParams.get('query'));
 
         if (!query) {

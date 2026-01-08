@@ -13,4 +13,7 @@ module.exports = {
   server: {
     port: process.env.PORT || 3000,
   },
+  adminPass: {
+    password: process.env.ADMIN_PASSWORD
+  }
 };

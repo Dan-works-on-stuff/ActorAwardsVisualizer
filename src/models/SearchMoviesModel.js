@@ -96,7 +96,7 @@ async function searchForCelebrity(query) {
                 news: [],
         error: `No celebrity found for "${trimmedQuery}".`
             };
-        }
+}
 
 async function fetchTrendingNews() {
         const trending = await fetchFromTMDB('/3/trending/all/day', { page: 1 });
@@ -110,7 +110,7 @@ async function fetchTrendingNews() {
         celebrity: null,
             news: items
         };
-    }
+}
 
 async function fetchCelebrityNews(query = '') {
     if (query?.trim()) {

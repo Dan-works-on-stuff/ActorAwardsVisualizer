@@ -1,3 +1,7 @@
+const config = require('../config');
+const {adminPass} = require("../config"); // Import the centralized config
+
+
 const sqlite3= require('sqlite3').verbose();
 const db = new sqlite3.Database('./src/data/actors_awards.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
@@ -15,9 +19,9 @@ function verifyPassword(req, res) {
         try {
             const { password } = JSON.parse(body);
             // The password from the .env file is loaded into process.env
-            const correctPassword = process.env.ADMIN_PASSWORD;
+            // const adminPass = adminPass;
 
-            if (password && password === correctPassword) {
+            if (password && password === adminPass.password) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true }));
             } else {

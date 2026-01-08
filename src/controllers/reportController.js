@@ -13,7 +13,7 @@ function createReport(req, res) {
         body += chunk.toString();
     });
 
-    req.on('end', async () => {
+    req.on('end', () => {
         try {
             const { message } = JSON.parse(body);
 
